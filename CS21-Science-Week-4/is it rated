@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+import java.math.*;
+import static java.lang.Math.*;
+import static java.lang.Integer.parseInt;
+import static java.lang.Long.parseLong;
+import static java.lang.Double.parseDouble;
+import static java.lang.String.*;
+
+public class Main {
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder out = new StringBuilder();
+        StringTokenizer tk;
+    
+        int n = parseInt(in.readLine());
+        
+        int [] a = new int[n];
+        int [] b = new int[n];
+        
+        for(int i=0; i<n; i++) {
+            tk = new StringTokenizer(in.readLine());
+            a[i] = parseInt(tk.nextToken());
+            b[i] = parseInt(tk.nextToken());
+            
+            if(a[i]!=b[i]) {
+                System.out.println("rated");
+                return;
+            }
+        }
+        
+        for(int i=1; i<n; i++) {
+            if(a[i] > a[i-1]) {
+                System.out.println("unrated");
+                return;
+            }
+        }
+        
+        System.out.println("maybe");
+    }
+    
+}
+ 
