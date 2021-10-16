@@ -1,0 +1,27 @@
+using namespace std;
+int main()
+{
+    int n ;
+    cin >> n ;
+ 
+    int x ,y ;
+    map<int ,int > addationGroup ;
+    map<int ,int > subtractionGroup ;
+ 
+    int count = 0 ;
+ 
+     for (int i = 0 ; i < n ; i++  )
+    {
+        cin >>  x   >> y  ;
+ 
+        count+= addationGroup[x+y] ; // get count of them
+        addationGroup[x+y]++ ;  // update count
+ 
+        count+= subtractionGroup[x-y] ;
+        subtractionGroup[x-y]++;
+ 
+    }
+ 
+    cout<< count ;
+    return 0;
+}
