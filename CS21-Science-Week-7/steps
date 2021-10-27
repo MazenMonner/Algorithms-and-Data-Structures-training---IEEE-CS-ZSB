@@ -1,0 +1,6 @@
+for (long long cof = 1100000000; cof; cof /= 2)
+    while (onField(xc + cof * dx, yc + cof * dy)) {
+        xc = xc + cof * dx;
+        yc = yc + cof * dy;
+        ans += cof;
+    }      
