@@ -1,0 +1,14 @@
+class Solution:
+    # @param {Interval[]} intervals
+    # @return {Interval[]}
+    def merge(self, intervals):
+        
+        out = []
+        for i in sorted(intervals, key = lambda i:i.start):
+            if out and i.start <= out[-1].end:
+                out[-1].end = max(i.end,out[-1].end)
+            else:
+                out.append(i)
+        return out
+© 2021 GitHub, Inc.
+Terms
