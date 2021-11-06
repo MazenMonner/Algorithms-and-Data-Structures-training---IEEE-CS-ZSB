@@ -1,0 +1,51 @@
+For any problems that uses DP I start off with a brute force recursion. It makes it easier for me to think about what the DP code would look like.
+
+def bruteForce(s):
+    mapper = set()
+    for i in range(1, 27):
+        mapper.add(str(i))
+    p = {}
+    for i in range(ord('A'), ord('Z')+1):
+        p[i-ord('A')+1] = chr(i)
+
+    solution = [0]
+
+    def helper(index,path=""):
+        if index >= len(s):
+            solution[0] += 1
+            return
+        current = ""
+        for i in range(index, len(s)):
+            current = current + s[i]
+            if current in mapper:
+                helper(i+1, path+p[int(current)])
+            else:
+                break
+    helper(0)
+    return solution[0]
+
+
+This problem reminds me of jump game. Any ways, the brute force code is looking forward and is sort of like hopping islands.
+
+Here is the DP code I came up with on my own.
+
+def numDecodings(s):
+    n = len(s)
+
+    if len(s) == 0:
+        return 0
+
+    A = [0] * (n+1)
+    A[0] = 1
+    for i in range(n):
+        if s[i] == '0':
+            continue
+        current = ""
+
+        for j in range(i, min(i+2, n)):
+            current += s[j]
+
+            if 1 <= int(current) <= 26:
+                A[i+len(current)] += A[i]
+
+    return A[n]
