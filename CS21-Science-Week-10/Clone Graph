@@ -1,0 +1,43 @@
+
+class Solution:
+    
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        
+        d = {}
+        oldToNewNodeDict = {}
+        if node is None:
+            return None
+        
+        def dfs(node):
+            n = node.neighbors
+            if len(n) == 0:
+                d[node] = []
+                oldToNewNodeDict[node] = Node(node.val)
+            else:
+                for i in n:
+                    try:
+                        x = d[node]
+                        if i in x:
+                            pass
+                        else:
+                            x.append(i)
+                            d[node] = x
+                            dfs(i)
+                    except KeyError:
+                        oldToNewNodeDict[node] = Node(node.val)
+                        d[node] = [i]
+                        dfs(i)
+                
+        
+        dfs(node)
+        
+        for i in oldToNewNodeDict.keys():
+            newNeighbors = []
+            neighbors = d[i]
+            for n in neighbors:
+                newNeighbors.append(oldToNewNodeDict[n])
+            
+            newNode = oldToNewNodeDict[i]
+            newNode.neighbors = newNeighbors
+        newHead = oldToNewNodeDict[node]
+        return newHead
